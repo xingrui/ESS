@@ -2,7 +2,7 @@ package src.share;
 
 import src.panels.*;
 
-/** The message exchange center that dispacth all the messages. */
+/** The message exchange center that dispatch all the messages. */
 public class MessageCenter {
     private InnerPanel[] in;
 
