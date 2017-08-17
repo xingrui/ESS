@@ -24,6 +24,8 @@ public class OuterPanel extends JPanel {
 
     private Indicator[] indicator;
 
+    private Database database;
+
     /** Update the Indicator status of this outerpanel. */
     public void updateStatus(int elevatorID, int currentFloor, String status)
     {
@@ -42,10 +44,11 @@ public class OuterPanel extends JPanel {
     }
 
     /** Every outerpanel has a floor number. */
-    public OuterPanel(int floorNumber, Queue[] queue)
+    public OuterPanel(int floorNumber, Queue[] queue, Database database)
     {
         this.floorNumber = floorNumber;
         this.queue = queue;
+        this.database = database;
 
         if (floorNumber != 1) {
             add(down);
@@ -111,7 +114,7 @@ public class OuterPanel extends JPanel {
             /*
              * to be realized::put the request to the proper queue;
              */
-            Database.addFloorRequest(floorNumber, "UP");
+            database.addFloorRequest(floorNumber, "UP");
             up.removeActionListener(a);
             up.setBackground(Color.RED);
             upListened = false;
@@ -126,7 +129,7 @@ public class OuterPanel extends JPanel {
             /*
              * to be realized::put the request to the proper queue;
              */
-            Database.addFloorRequest(floorNumber, "DOWN");
+            database.addFloorRequest(floorNumber, "DOWN");
             down.removeActionListener(b);
             down.setBackground(Color.RED);
             downListened = false;

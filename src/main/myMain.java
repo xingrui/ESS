@@ -4,6 +4,7 @@ import javax.swing.*;
 import src.panels.*;
 import src.share.*;
 import src.control.*;
+import src.database.*;
 
 /** Our Main function. */
 public class myMain {
@@ -13,17 +14,18 @@ public class myMain {
      */
     public myMain()
     {
+        Database database = DatabaseMysqlImp.getInstance();
         final Queue[] queue = new Queue[1];
         InnerPanel[] in = new InnerPanel[1];
         OuterPanel[] outer = new OuterPanel[10];
-        AdminPanel admin = new AdminPanel(queue);
+        AdminPanel admin = new AdminPanel(queue, database);
         MessageCenter mc = new MessageCenter(in, outer, admin);
         queue[0] = new Queue();
         new Controller(queue[0], mc);
-        in[0] = new InnerPanel(queue[0], 0);
+        in[0] = new InnerPanel(queue[0], 0, database);
 
         for (int i = 0; i < 10; i++) {
-            outer[i] = new OuterPanel(i + 1, queue);
+            outer[i] = new OuterPanel(i + 1, queue, database);
         }
 
         new Admin(admin);

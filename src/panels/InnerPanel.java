@@ -12,6 +12,8 @@ public class InnerPanel extends JPanel {
 
     private int elevatorID;
 
+    private Database database;
+
     private Indicator indicator = new Indicator();
 
     private JButton button[] = new JButton[11];
@@ -44,7 +46,7 @@ public class InnerPanel extends JPanel {
             queue.enqueue(new InnerMessage(floor));
             button[floor].removeActionListener(listener[floor]);
             button[floor].setBackground(Color.RED);
-            Database.addControlRecords(elevatorID, e.getActionCommand());
+            database.addControlRecords(elevatorID, e.getActionCommand());
         }
 
         public FloorListener(int i)
@@ -58,15 +60,16 @@ public class InnerPanel extends JPanel {
         public void actionPerformed(ActionEvent e)
         {
             queue.enqueue(new OtherMessage(e.getActionCommand()));
-            Database.addControlRecords(elevatorID, e.getActionCommand());
+            database.addControlRecords(elevatorID, e.getActionCommand());
         }
     }
 
     /** Every InnerPanel has a request queue and an elevatorID. */
-    public InnerPanel(Queue queue, int elevatorID)
+    public InnerPanel(Queue queue, int elevatorID, Database database)
     {
         this.elevatorID = elevatorID;
         this.queue = queue;
+        this.database = database;
         setLayout(new GridLayout(5, 3, 5, 5));
 
         for (int i = 10; i > 0; i--) {

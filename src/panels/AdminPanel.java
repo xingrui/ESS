@@ -7,12 +7,14 @@ import java.util.Vector;
 import java.awt.*;
 
 import src.share.*;
-import src.database.*;
+import src.database.Database;
 
 @SuppressWarnings("serial")
 public class AdminPanel extends JPanel {
 
     private Queue queue[];
+
+    private Database database;
 
     private Indicator[] indicator;
 
@@ -70,7 +72,7 @@ public class AdminPanel extends JPanel {
 
                 try {
                     int id = Integer.parseInt(input.getText());
-                    Vector<String> v = Database.getRecords(id);
+                    Vector<String> v = database.getRecords(id);
                     Iterator<String> it = v.iterator();
 
                     while (it.hasNext()) {
@@ -110,12 +112,13 @@ public class AdminPanel extends JPanel {
         auto.setEnabled(false);
     }
 
-    public AdminPanel(Queue[] queue)
+    public AdminPanel(Queue[] queue, Database database)
     {
         initinal();
         add(panelLogIn);
         elevatorNumber = queue.length;
         this.queue = queue;
+        this.database = database;
         indicator = new Indicator[elevatorNumber];
 
         for (int i = 0; i < elevatorNumber; i++) {
@@ -137,7 +140,7 @@ public class AdminPanel extends JPanel {
         {
             for (int i = 0; i < elevatorNumber; i++) {
                 queue[i].enqueue(new AdminMessage(e.getActionCommand()));
-                Database.addControlRecords(i, e.getActionCommand());
+                database.addControlRecords(i, e.getActionCommand());
             }
 
             if (type) {
@@ -161,14 +164,14 @@ public class AdminPanel extends JPanel {
     /** set the status of the elevator according to the elevatorID. */
     public void setStatus(int elevatorID, int currentFloor, String status)
     {
-        Database.updateStatus(elevatorID, status, currentFloor);
+        database.updateStatus(elevatorID, status, currentFloor);
         indicator[elevatorID].updateStatus(currentFloor, status);
     }
 
     /** Process the emergency event. */
     public void emergency(int elevatorID)
     {
-        Database.addControlRecords(elevatorID, "emergency");
+        database.addControlRecords(elevatorID, "emergency");
         int choose = JOptionPane.showConfirmDialog(null,
                      "Stop the elevator now?");
 
@@ -218,7 +221,7 @@ public class AdminPanel extends JPanel {
             String a = name.getText();
             String b = String.copyValueOf(password.getPassword());
 
-            if (Database.isAdmin(a, b)) {
+            if (database.isAdmin(a, b)) {
                 this.setVisible(false);
                 panel1.setVisible(true);
             } else
