@@ -1,8 +1,6 @@
 package src.database;
 
-import java.sql.*;
 import java.util.Vector;
-import javax.swing.*;
 
 /**
  * This class process all the method of update require and delete of the data in
