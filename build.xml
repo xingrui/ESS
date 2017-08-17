@@ -10,7 +10,10 @@
         <fileset file="${lib.dir}/*.jar" />
         <pathelement path="${classes.dir}" />
     </path>
-    <target name="compile">
+    <target name="clean">
+        <delete dir="${classes.dir}"/>
+    </target>
+    <target name="compile" depends="clean">
         <mkdir dir="classes" />
         <javac srcdir="${src.dir}" destdir="classes" classpathref="master-classpath" includeantruntime="on" />
     </target>
