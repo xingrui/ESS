@@ -1,0 +1,48 @@
+# This file is configuration file of astyle.
+# short options can be concatenated together
+
+-A4 # Bracket Style Option 
+# A4 : Brackets are broken from function definitions only. 
+#      Brackets are attached to namespaces, classes, and statements within a function.
+
+-s4 # Tab Option
+# s4 : Astyle default indent : 4 spaces per indent 
+
+-wc # Indentation Option Formatting Option
+# w : Indent multi-line preprocessor definitions ending with a backslash. 
+#     Should be used with --convert-tabs for proper results.
+# c : Converts tabs into spaces in the non-indentation part of the line.
+
+-S # Indentation Option
+# S : Indent 'switch' blocks so that the 'case X:' statements are indented in the switch block.
+
+# -C # Indentation Option
+# Indent 'class' and 'struct' blocks so that the blocks 'public:', 'protected:' and 'private:' are indented. 
+
+# -N # Indentation Option
+# Add extra indentation to namespace blocks. 
+
+-k1 # Formatting Option
+# k1 : Attach a pointer or reference operator to the variable type.
+
+-f # Padding Option
+# f : Pad empty lines around header blocks(eg 'if' 'while', 'for'...).
+
+-p # Padding Option
+# p : Insert space padding around operators. 
+
+-H # Padding Option
+# H : Insert space padding after paren headers only(eg. 'if', 'for', 'while'...).
+
+-U
+# U : This option can be used in combination with the paren padding options above. 
+#     Only padding that has not been requested by other options will be removed.
+
+-n # Other Option
+# n : Do not retain a backup of the original file.
+
+--exclude=idl # Other Option
+# --exclude=idl : Specify a file or sub directory #### to be excluded from processing.
+
+-xi # Other Option
+# xi : Allow processing to continue if there are errors in the "exclude=###" options.

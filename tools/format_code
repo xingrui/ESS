@@ -1,0 +1,13 @@
+#!/bin/bash
+# This file is used to format all code in current directory and subdirectories exclude idl directory
+# Artistic Style Version 2.02.1
+basepath=$(cd `dirname $0`; pwd)
+echo $basepath
+ASTYLE_CFG_FILE=$basepath/cfg_astyle
+if [ "$1" != "" ]
+then
+    file=$1
+    astyle --options=$basepath/cfg_astyle_single $1
+    exit 0
+fi
+astyle --options=$ASTYLE_CFG_FILE "*.java"
