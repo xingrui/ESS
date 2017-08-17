@@ -12,208 +12,225 @@ import src.database.*;
 @SuppressWarnings("serial")
 public class AdminPanel extends JPanel {
 
-	private Queue queue[];
+    private Queue queue[];
 
-	private Indicator[] indicator;
+    private Indicator[] indicator;
 
-	private JLabel tag = new JLabel("Input elevatorID here");
+    private JLabel tag = new JLabel("Input elevatorID here");
 
-	private JTextField input = new JTextField(6);
+    private JTextField input = new JTextField(6);
 
-	private JButton start = new JButton("START");
+    private JButton start = new JButton("START");
 
-	private JButton stop = new JButton("STOP");
+    private JButton stop = new JButton("STOP");
 
-	private JButton getRecords = new JButton("getRecords");
+    private JButton getRecords = new JButton("getRecords");
 
-	private JButton logOut = new JButton("Log Out");
+    private JButton logOut = new JButton("Log Out");
 
-	private JButton auto = new JButton("Auto Play");
+    private JButton auto = new JButton("Auto Play");
 
-	private ActionListener a = new Listener(true), b = new Listener(false);
+    private ActionListener a = new Listener(true), b = new Listener(false);
 
-	private JTextArea area = new JTextArea(8, 30);
+    private JTextArea area = new JTextArea(8, 30);
 
-	private int elevatorNumber;
+    private int elevatorNumber;
 
-	JPanel panel1 = new JPanel();
+    JPanel panel1 = new JPanel();
 
-	Login panelLogIn = new Login();
+    Login panelLogIn = new Login();
 
-	/* initinalize the admin panel. */
-	private void initinal() {
-		panel1.setLayout(new GridLayout(3, 2, 4, 4));
-		panel1.add(start);
-		panel1.add(stop);
-		panel1.add(tag);
-		panel1.add(input);
-		panel1.add(getRecords);
-		panel1.add(logOut);
-		panel1.add(auto);
-		input.addKeyListener(new KeyListener() {
+    /* initinalize the admin panel. */
+    private void initinal()
+    {
+        panel1.setLayout(new GridLayout(3, 2, 4, 4));
+        panel1.add(start);
+        panel1.add(stop);
+        panel1.add(tag);
+        panel1.add(input);
+        panel1.add(getRecords);
+        panel1.add(logOut);
+        panel1.add(auto);
+        input.addKeyListener(new KeyListener() {
 
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER)
-					getRecords.doClick();
-			}
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                    getRecords.doClick();
+            }
 
-			public void keyReleased(KeyEvent e) {
-			}
+            public void keyReleased(KeyEvent e) {
+            }
 
-			public void keyTyped(KeyEvent e) {
-			}
-		});
-		getRecords.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				area.setText("");
-				try {
-					int id = Integer.parseInt(input.getText());
-					Vector<String> v = Database.getRecords(id);
-					Iterator<String> it = v.iterator();
-					while (it.hasNext()) {
-						area.append(it.next() + "\n");
-					}
-				} catch (NumberFormatException e1) {
-					input.setText("WRONG FORMAT");
-				}
-			}
-		});
-		logOut.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int choose = JOptionPane.showConfirmDialog(null,
-						"Are you sure to logout?");
-				if (choose == 0) {
-					area.setText("");
-					stop.doClick();
-					panel1.setVisible(false);
-					panelLogIn.name.setText("");
-					panelLogIn.password.setText("");
-					panelLogIn.setVisible(true);
-				}
-			}
-		});
-		auto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				queue[0].enqueue(new AdminMessage(e.getActionCommand()));
-				// change the text of the command.
-				if (e.getActionCommand().equals("Auto Play"))
-					auto.setText("CancelAutoPlay");
-				else
-					auto.setText("Auto Play");
-			}
-		});
-		auto.setEnabled(false);
-	}
+            public void keyTyped(KeyEvent e) {
+            }
+        });
+        getRecords.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                area.setText("");
 
-	public AdminPanel(Queue[] queue) {
-		initinal();
-		add(panelLogIn);
-		elevatorNumber = queue.length;
-		this.queue = queue;
-		indicator = new Indicator[elevatorNumber];
-		for (int i = 0; i < elevatorNumber; i++) {
-			indicator[i] = new Indicator();
-			panel1.add(indicator[i]);
-		}
-		area.setEditable(false);
-		start.addActionListener(a);
-		add(new JScrollPane(area));
-		add(panel1);
-		panel1.setVisible(false);
-	}
+                try {
+                    int id = Integer.parseInt(input.getText());
+                    Vector<String> v = Database.getRecords(id);
+                    Iterator<String> it = v.iterator();
 
-	private class Listener implements ActionListener {
-		private boolean type;
+                    while (it.hasNext()) {
+                        area.append(it.next() + "\n");
+                    }
+                } catch (NumberFormatException e1) {
+                    input.setText("WRONG FORMAT");
+                }
+            }
+        });
+        logOut.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int choose = JOptionPane.showConfirmDialog(null,
+                             "Are you sure to logout?");
 
-		public void actionPerformed(ActionEvent e) {
-			for (int i = 0; i < elevatorNumber; i++) {
-				queue[i].enqueue(new AdminMessage(e.getActionCommand()));
-				Database.addControlRecords(i, e.getActionCommand());
-			}
-			if (type) {
-				auto.setEnabled(true);
-				start.removeActionListener(a);
-				stop.addActionListener(b);
-			} else {
-				auto.setEnabled(false);
-				auto.setText("Auto Play");
-				stop.removeActionListener(b);
-				start.addActionListener(a);
-			}
-		}
+                if (choose == 0) {
+                    area.setText("");
+                    stop.doClick();
+                    panel1.setVisible(false);
+                    panelLogIn.name.setText("");
+                    panelLogIn.password.setText("");
+                    panelLogIn.setVisible(true);
+                }
+            }
+        });
+        auto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                queue[0].enqueue(new AdminMessage(e.getActionCommand()));
 
-		public Listener(boolean i) {
-			type = i;
-		}
-	}
+                // change the text of the command.
+                if (e.getActionCommand().equals("Auto Play"))
+                    auto.setText("CancelAutoPlay");
+                else
+                    auto.setText("Auto Play");
+            }
+        });
+        auto.setEnabled(false);
+    }
 
-	/** set the status of the elevator according to the elevatorID. */
-	public void setStatus(int elevatorID, int currentFloor, String status) {
-		Database.updateStatus(elevatorID, status, currentFloor);
-		indicator[elevatorID].updateStatus(currentFloor, status);
-	}
+    public AdminPanel(Queue[] queue)
+    {
+        initinal();
+        add(panelLogIn);
+        elevatorNumber = queue.length;
+        this.queue = queue;
+        indicator = new Indicator[elevatorNumber];
 
-	/** Process the emergency event. */
-	public void emergency(int elevatorID) {
-		Database.addControlRecords(elevatorID, "emergency");
-		int choose = JOptionPane.showConfirmDialog(null,
-				"Stop the elevator now?");
-		if (choose == 0)
-			stop.doClick();
-	}
+        for (int i = 0; i < elevatorNumber; i++) {
+            indicator[i] = new Indicator();
+            panel1.add(indicator[i]);
+        }
 
-	/* The login panel of the admin panel. */
-	private class Login extends JPanel implements ActionListener {
-		private JLabel p1 = new JLabel("Name:");
+        area.setEditable(false);
+        start.addActionListener(a);
+        add(new JScrollPane(area));
+        add(panel1);
+        panel1.setVisible(false);
+    }
 
-		private JLabel p2 = new JLabel("Password:");
+    private class Listener implements ActionListener {
+        private boolean type;
 
-		private JTextField name = new JTextField(10);
+        public void actionPerformed(ActionEvent e)
+        {
+            for (int i = 0; i < elevatorNumber; i++) {
+                queue[i].enqueue(new AdminMessage(e.getActionCommand()));
+                Database.addControlRecords(i, e.getActionCommand());
+            }
 
-		private JPasswordField password = new JPasswordField(10);
+            if (type) {
+                auto.setEnabled(true);
+                start.removeActionListener(a);
+                stop.addActionListener(b);
+            } else {
+                auto.setEnabled(false);
+                auto.setText("Auto Play");
+                stop.removeActionListener(b);
+                start.addActionListener(a);
+            }
+        }
 
-		private JButton login = new JButton("Login");
+        public Listener(boolean i)
+        {
+            type = i;
+        }
+    }
 
-		private JPanel panel = new JPanel();
-		{
-			panel.setLayout(new GridLayout(3, 2, 5, 5));
-			panel.add(p1);
-			panel.add(name);
-			panel.add(p2);
-			panel.add(password);
-			panel.add(login);
-			login.addActionListener(this);
-			password.setEchoChar('*');
-			password.addKeyListener(new KeyListener() {
+    /** set the status of the elevator according to the elevatorID. */
+    public void setStatus(int elevatorID, int currentFloor, String status)
+    {
+        Database.updateStatus(elevatorID, status, currentFloor);
+        indicator[elevatorID].updateStatus(currentFloor, status);
+    }
 
-				public void keyPressed(KeyEvent e) {
-					if (e.getKeyCode() == KeyEvent.VK_ENTER)
-						login.doClick();
-				}
+    /** Process the emergency event. */
+    public void emergency(int elevatorID)
+    {
+        Database.addControlRecords(elevatorID, "emergency");
+        int choose = JOptionPane.showConfirmDialog(null,
+                     "Stop the elevator now?");
 
-				public void keyReleased(KeyEvent arg0) {
-				}
+        if (choose == 0)
+            stop.doClick();
+    }
 
-				public void keyTyped(KeyEvent arg0) {
-				}
-			});
-		}
+    /* The login panel of the admin panel. */
+    private class Login extends JPanel implements ActionListener {
+        private JLabel p1 = new JLabel("Name:");
 
-		public void actionPerformed(ActionEvent e) {
-			String a = name.getText();
-			String b = String.copyValueOf(password.getPassword());
-			if (Database.isAdmin(a, b)) {
-				this.setVisible(false);
-				panel1.setVisible(true);
-			} else
-				JOptionPane.showMessageDialog(null,
-						"Wrong name or password.\nPlease enter again!");
-		}
+        private JLabel p2 = new JLabel("Password:");
 
-		public Login() {
-			add(panel);
-			setSize(200, 150);
-			setLocation(400, 300);
-		}
-	}
+        private JTextField name = new JTextField(10);
+
+        private JPasswordField password = new JPasswordField(10);
+
+        private JButton login = new JButton("Login");
+
+        private JPanel panel = new JPanel();
+        {
+            panel.setLayout(new GridLayout(3, 2, 5, 5));
+            panel.add(p1);
+            panel.add(name);
+            panel.add(p2);
+            panel.add(password);
+            panel.add(login);
+            login.addActionListener(this);
+            password.setEchoChar('*');
+            password.addKeyListener(new KeyListener() {
+
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_ENTER)
+                        login.doClick();
+                }
+
+                public void keyReleased(KeyEvent arg0) {
+                }
+
+                public void keyTyped(KeyEvent arg0) {
+                }
+            });
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            String a = name.getText();
+            String b = String.copyValueOf(password.getPassword());
+
+            if (Database.isAdmin(a, b)) {
+                this.setVisible(false);
+                panel1.setVisible(true);
+            } else
+                JOptionPane.showMessageDialog(null,
+                                              "Wrong name or password.\nPlease enter again!");
+        }
+
+        public Login()
+        {
+            add(panel);
+            setSize(200, 150);
+            setLocation(400, 300);
+        }
+    }
 }

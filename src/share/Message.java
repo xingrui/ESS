@@ -5,7 +5,7 @@ package src.share;
  * interfaces in the elevator simulation system.
  */
 public interface Message {
-	int getNumber();
+    int getNumber();
 
-	Type getType();
+    Type getType();
 }
