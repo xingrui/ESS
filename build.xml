@@ -12,7 +12,7 @@
 	</path>
 	<target name="compile">
 		<mkdir dir="classes" />
-		<javac srcdir="${src.dir}" destdir="classes" classpathref="master-classpath" />
+		<javac srcdir="${src.dir}" destdir="classes" classpathref="master-classpath" includeantruntime="on" />
 	</target>
 	<target name="copy" depends="compile">
 		<copy file="src/panels/UP.GIF" todir="classes/src/panels" />
