@@ -9,7 +9,7 @@ import src.control.*;
 public class myMain {
 	/**
 	 * Create InnerPanel, OuterPanel, AdminPanel, messagequeue, controller,
-	 * mesagecenter£¬and so on.
+	 * mesagecenter,and so on.
 	 */
 	public myMain() {
 		final Queue[] queue = new Queue[1];
@@ -18,16 +18,7 @@ public class myMain {
 		AdminPanel admin = new AdminPanel(queue);
 		MessageCenter mc = new MessageCenter(in, outer, admin);
 		queue[0] = new Queue();
-		int choose = JOptionPane.showConfirmDialog(null,
-				"Do you want to use 3D Elevator?.\n"
-						+ "(3D may need high configuration of you computer)");
-		System.out.println(choose);
-		if (choose == 0)
-			new Controller(queue[0], mc, true);
-		else if (choose == 1)
-			new Controller(queue[0], mc, false);
-		else
-			return;
+		new Controller(queue[0], mc);
 		in[0] = new InnerPanel(queue[0], 0);
 		for (int i = 0; i < 10; i++) {
 			outer[i] = new OuterPanel(i + 1, queue);

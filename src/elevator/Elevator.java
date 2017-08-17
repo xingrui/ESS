@@ -6,7 +6,6 @@ import java.awt.*;
 import java.net.URL;
 
 import src.control.Controller;
-import com.sun.j3d.utils.applet.MainFrame;
 
 /**
  * This class is used to drive the elevator system by requiring the controller
@@ -19,8 +18,6 @@ public class Elevator extends JFrame {
 	}
 
 	private Controller controller;
-
-	private Elevator3D t = new Elevator3D();
 
 	private Thread topen, tstart, tstop, tmove;
 
@@ -38,17 +35,14 @@ public class Elevator extends JFrame {
 
 	private Board board = new Board();
 
-	public Elevator(Controller controller, boolean flag) {
+	public Elevator(Controller controller) {
 		this.controller = controller;
 		setTitle("Elevator");
 		Container cp = getContentPane();
 		cp.add(new JScrollPane(board));
 		setSize(150, 650);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		if (flag)
-			new MainFrame(t, 345, 615);
-		else
-			setVisible(true);
+		setVisible(true);
 		new TWait().start();
 	}
 
@@ -153,7 +147,6 @@ public class Elevator extends JFrame {
 					location += i / 10 * 0.001;
 				else
 					location -= i / 10 * 0.001;
-				t.setlocation(location);
 				repaint();
 				try {
 					sleep(SLEEPTIME);
@@ -207,7 +200,6 @@ public class Elevator extends JFrame {
 							stopping(0);
 						}
 				}
-				t.setlocation(location);
 				repaint();
 				try {
 					sleep(SLEEPTIME);
@@ -232,7 +224,6 @@ public class Elevator extends JFrame {
 					location += (10 - i / 10) * 0.001;
 				else if (direct == Direct.DOWN)
 					location -= (10 - i / 10) * 0.001;
-				t.setlocation(location);
 				repaint();
 				try {
 					sleep(SLEEPTIME);
@@ -293,7 +284,6 @@ public class Elevator extends JFrame {
 			while (board.x < 100) {
 				board.x++;
 				board.repaint();
-				t.open(board.x / 100.0);
 				try {
 					sleep(SLEEPTIME);
 				} catch (InterruptedException e) {
@@ -331,7 +321,6 @@ public class Elevator extends JFrame {
 			flag = true;
 			while (board.x > 0 && flag) {
 				board.x--;
-				t.open(board.x / 100.0);
 				board.repaint();
 				try {
 					sleep(SLEEPTIME);

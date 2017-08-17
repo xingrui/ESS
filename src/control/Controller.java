@@ -64,8 +64,8 @@ public class Controller {
 		state = flag ? UP : DOWN;
 	}
 
-	public Controller(Queue from, MessageCenter mc, boolean flag) {
-		elevator = new Elevator(this, flag);
+	public Controller(Queue from, MessageCenter mc) {
+		elevator = new Elevator(this);
 		elevator.setLocation(200, 0);
 		elevatorID = number++;
 		currentFloor = 1;

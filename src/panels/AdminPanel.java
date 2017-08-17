@@ -183,7 +183,7 @@ public class AdminPanel extends JPanel {
 			panel.add(password);
 			panel.add(login);
 			login.addActionListener(this);
-			password.setEchoChar('¡ñ');
+			password.setEchoChar('*');
 			password.addKeyListener(new KeyListener() {
 
 				public void keyPressed(KeyEvent e) {
