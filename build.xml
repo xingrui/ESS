@@ -6,21 +6,11 @@
 	<property name="lib.dir" value="lib" />
 	<property name="dist.dir" value="dist" />
 	<property name="doc.dir" value="doc" />
-	<property name="driver" value="com.mysql.jdbc.Driver" />
-	<property name="url" value="jdbc:mysql://localhost" />
-	<property name="Id" value="root" />
-	<property name="pw" value="123456" />
-	<property name="SQL" value="createTables.sql" />
 	<path id="master-classpath">
 		<fileset file="${lib.dir}/*.jar" />
 		<pathelement path="${classes.dir}" />
 	</path>
-	<target name="createTables">
-		<sql driver="${driver}" url="${url}" userid="${Id}" password="${pw}" src="${SQL}" onerror="continue">
-			<classpath refid="master-classpath" />
-		</sql>
-	</target>
-	<target name="compile" depends="createTables">
+	<target name="compile">
 		<mkdir dir="classes" />
 		<javac srcdir="${src.dir}" destdir="classes" classpathref="master-classpath" />
 	</target>
