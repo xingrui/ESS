@@ -1,50 +1,50 @@
 <?xml version="1.0"?>
 <project name="ESS" basedir="./" default="docs">
-	<property name="src.dir" value="src" />
-	<property name="report.dir" value="report" />
-	<property name="classes.dir" value="classes" />
-	<property name="lib.dir" value="lib" />
-	<property name="dist.dir" value="dist" />
-	<property name="doc.dir" value="doc" />
-	<path id="master-classpath">
-		<fileset file="${lib.dir}/*.jar" />
-		<pathelement path="${classes.dir}" />
-	</path>
-	<target name="compile">
-		<mkdir dir="classes" />
-		<javac srcdir="${src.dir}" destdir="classes" classpathref="master-classpath" includeantruntime="on" />
-	</target>
-	<target name="copy" depends="compile">
-		<copy file="src/panels/UP.GIF" todir="classes/src/panels" />
-		<copy file="src/panels/DOWN.GIF" todir="classes/src/panels" />
-		<copy file="src/panels/STOP.GIF" todir="classes/src/panels" />
-		<copy file="src/control/alarm.wav" todir="classes/src/control" />
-		<copy file="src/elevator/notify.wav" todir="classes/src/elevator" />
-	</target>
-	<target name="test" depends="copy" description="run junit test">
-		<mkdir dir="${report.dir}" />
-		<junit printsummary="on" haltonfailure="false" failureproperty="tests.failed" showoutput="true">
-			<classpath refid="master-classpath" />
-			<formatter type="plain" />
-			<batchtest todir="${report.dir}">
-				<fileset dir="${classes.dir}">
-					<include name="**/*Test.*" />
-				</fileset>
-			</batchtest>
-		</junit>
-	</target>
-	<target name="unjar" depends="test">
-		<unjar src="lib/mysql-connector-java-5.0.5-bin.jar" dest="classes" />
-	</target>
-	<target name="pack" depends="unjar">
-		<jar jarfile="ESS.jar" basedir="classes">
-			<manifest>
-				<attribute name="Main-Class" value="src.main.myMain" />
-			</manifest>
-		</jar>
-	</target>
-	<target name="docs" depends="pack" description="create api doc">
-		<mkdir dir="${doc.dir}" />
-		<javadoc packagenames="*.*" sourcepath="." use="true" destdir="${doc.dir}" author="true" version="true" />
-	</target>
+    <property name="src.dir" value="src" />
+    <property name="report.dir" value="report" />
+    <property name="classes.dir" value="classes" />
+    <property name="lib.dir" value="lib" />
+    <property name="dist.dir" value="dist" />
+    <property name="doc.dir" value="doc" />
+    <path id="master-classpath">
+        <fileset file="${lib.dir}/*.jar" />
+        <pathelement path="${classes.dir}" />
+    </path>
+    <target name="compile">
+        <mkdir dir="classes" />
+        <javac srcdir="${src.dir}" destdir="classes" classpathref="master-classpath" includeantruntime="on" />
+    </target>
+    <target name="copy" depends="compile">
+        <copy file="src/panels/UP.GIF" todir="classes/src/panels" />
+        <copy file="src/panels/DOWN.GIF" todir="classes/src/panels" />
+        <copy file="src/panels/STOP.GIF" todir="classes/src/panels" />
+        <copy file="src/control/alarm.wav" todir="classes/src/control" />
+        <copy file="src/elevator/notify.wav" todir="classes/src/elevator" />
+    </target>
+    <target name="test" depends="copy" description="run junit test">
+        <mkdir dir="${report.dir}" />
+        <junit printsummary="on" haltonfailure="false" failureproperty="tests.failed" showoutput="true">
+            <classpath refid="master-classpath" />
+            <formatter type="plain" />
+            <batchtest todir="${report.dir}">
+                <fileset dir="${classes.dir}">
+                    <include name="**/*Test.*" />
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+    <target name="unjar" depends="test">
+        <unjar src="lib/mysql-connector-java-5.0.5-bin.jar" dest="classes" />
+    </target>
+    <target name="pack" depends="unjar">
+        <jar jarfile="ESS.jar" basedir="classes">
+            <manifest>
+                <attribute name="Main-Class" value="src.main.myMain" />
+            </manifest>
+        </jar>
+    </target>
+    <target name="docs" depends="pack" description="create api doc">
+        <mkdir dir="${doc.dir}" />
+        <javadoc packagenames="*.*" sourcepath="." use="true" destdir="${doc.dir}" author="true" version="true" />
+    </target>
 </project>
