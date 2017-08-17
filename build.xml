@@ -12,6 +12,8 @@
     </path>
     <target name="clean">
         <delete dir="${classes.dir}"/>
+        <delete dir="${report.dir}"/>
+        <delete dir="${doc.dir}"/>
     </target>
     <target name="compile" depends="clean">
         <mkdir dir="classes" />
