@@ -9,7 +9,7 @@ import src.database.AbstractSqlDatabase;
  * This class process all the method of update require and delete of the data in
  * the database.
  */
-public class DatabaseSqliteImp extends AbstractSqlDatabase{
+public class DatabaseSqliteImp extends AbstractSqlDatabase {
     private static final Database imp = new DatabaseSqliteImp();
     public static Database getInstance()
     {
