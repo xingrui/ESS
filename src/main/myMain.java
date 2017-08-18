@@ -15,7 +15,7 @@ public class myMain {
     public myMain()
     {
         // Database database = DatabaseMysqlImp.getInstance();
-        Database database = DatabaseNullImp.getInstance();
+        Database database = DatabaseSqliteImp.getInstance();
         final Queue[] queue = new Queue[1];
         InnerPanel[] in = new InnerPanel[1];
         OuterPanel[] outer = new OuterPanel[10];

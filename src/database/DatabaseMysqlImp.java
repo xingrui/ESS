@@ -105,7 +105,7 @@ public class DatabaseMysqlImp implements Database {
                      + new Time(System.currentTimeMillis()) + "')";
 
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
         } catch (SQLException e) {
             System.out.println("Error in addFloorRequest");
             e.printStackTrace();
@@ -158,7 +158,7 @@ public class DatabaseMysqlImp implements Database {
                      + new Time(System.currentTimeMillis()) + "','" + event + "')";
 
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -191,7 +191,7 @@ public class DatabaseMysqlImp implements Database {
                      + currentFloor + " where elevatorID = " + i;
 
         try {
-            stmt.execute(sql);
+            stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();
         }

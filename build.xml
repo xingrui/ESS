@@ -40,6 +40,7 @@
     </target>
     <target name="unjar" depends="test">
         <unjar src="lib/mysql-connector-java-5.0.5-bin.jar" dest="classes" />
+        <unjar src="lib/sqlite-jdbc-3.20.0.jar" dest="classes" />
     </target>
     <target name="pack" depends="unjar">
         <jar jarfile="ESS.jar" basedir="classes">
