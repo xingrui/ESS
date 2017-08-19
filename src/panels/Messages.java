@@ -22,11 +22,13 @@ class AdminMessage implements Message {
             number = 3;
     }
 
+    @Override
     public Type getType()
     {
         return Type.ADMIN;
     }
 
+    @Override
     public int getNumber()
     {
         return number;
@@ -43,11 +45,13 @@ class InnerMessage implements Message {
         floor = i;
     }
 
+    @Override
     public int getNumber()
     {
         return floor;
     }
 
+    @Override
     public Type getType()
     {
         return Type.INNER;
@@ -65,11 +69,13 @@ class OuterDownMessage implements Message {
         floor = i;
     }
 
+    @Override
     public int getNumber()
     {
         return floor;
     }
 
+    @Override
     public Type getType()
     {
         return Type.OUTER_DOWN;
@@ -87,11 +93,13 @@ class OuterUpMessage implements Message {
         floor = i;
     }
 
+    @Override
     public int getNumber()
     {
         return floor;
     }
 
+    @Override
     public Type getType()
     {
         return Type.OUTER_UP;
@@ -117,12 +125,14 @@ class OtherMessage implements Message {
             System.err.println("No Such Message!");
     }
 
+    @Override
     public Type getType()
     {
 
         return type;
     }
 
+    @Override
     public int getNumber()
     {
 

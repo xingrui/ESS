@@ -52,6 +52,7 @@ public class Autoplay {
 
     /* A thread generatng randam number. */
     private class Generate extends Thread {
+        @Override
         public void run()
         {
             while (flag) {

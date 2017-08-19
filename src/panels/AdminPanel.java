@@ -136,6 +136,7 @@ public class AdminPanel extends JPanel {
     private class Listener implements ActionListener {
         private boolean type;
 
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             for (int i = 0; i < elevatorNumber; i++) {
@@ -216,6 +217,7 @@ public class AdminPanel extends JPanel {
             });
         }
 
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             String a = name.getText();

@@ -41,6 +41,7 @@ public class InnerPanel extends JPanel {
     private class FloorListener implements ActionListener {
         private int floor;
 
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             queue.enqueue(new InnerMessage(floor));
@@ -57,6 +58,7 @@ public class InnerPanel extends JPanel {
 
     /* The listener of the other buttons. */
     private class OtherListener implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             queue.enqueue(new OtherMessage(e.getActionCommand()));

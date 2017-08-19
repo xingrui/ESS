@@ -20,11 +20,13 @@ public class ControllerTest extends TestCase {
 
     private Queue queue;
 
+    @Override
     protected void setUp() throws Exception
     {
         super.setUp();
     }
 
+    @Override
     protected void tearDown() throws Exception
     {
         super.tearDown();
@@ -217,11 +219,13 @@ class InnerMessage implements Message {
         floor = i;
     }
 
+    @Override
     public int getNumber()
     {
         return floor;
     }
 
+    @Override
     public Type getType()
     {
         return Type.INNER;
@@ -238,11 +242,13 @@ class OuterDownMessage implements Message {
         floor = i;
     }
 
+    @Override
     public int getNumber()
     {
         return floor;
     }
 
+    @Override
     public Type getType()
     {
         return Type.OUTER_DOWN;
@@ -259,11 +265,13 @@ class OuterUpMessage implements Message {
         floor = i;
     }
 
+    @Override
     public int getNumber()
     {
         return floor;
     }
 
+    @Override
     public Type getType()
     {
         return Type.OUTER_UP;

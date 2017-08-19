@@ -162,6 +162,7 @@ public class Elevator extends JFrame {
             direction = d;
         }
 
+        @Override
         public void run()
         {
             direct = direction ? Direct.UP : Direct.DOWN;
@@ -195,6 +196,7 @@ public class Elevator extends JFrame {
             direction = d;
         }
 
+        @Override
         public void run()
         {
             double distance;
@@ -254,6 +256,7 @@ public class Elevator extends JFrame {
             time = t;
         }
 
+        @Override
         public void run()
         {
             for (int i = 0; i < 100; i++) {
@@ -292,6 +295,7 @@ public class Elevator extends JFrame {
      * open door.
      */
     private class TWait extends Thread {
+        @Override
         public void run()
         {
             while (true) {
@@ -327,6 +331,7 @@ public class Elevator extends JFrame {
 
     /* Thread for opening the door. */
     private class TOpen extends Thread {
+        @Override
         public void run()
         {
             while (board.x < 100) {
@@ -352,6 +357,7 @@ public class Elevator extends JFrame {
             this.time = time;
         }
 
+        @Override
         public void run()
         {
             try {
@@ -369,6 +375,7 @@ public class Elevator extends JFrame {
     private class TClose extends Thread {
         boolean flag;
 
+        @Override
         public void run()
         {
             flag = true;
@@ -405,6 +412,7 @@ public class Elevator extends JFrame {
         {
         }
 
+        @Override
         public void paintComponent(Graphics g)
         {
             super.paintComponent(g);

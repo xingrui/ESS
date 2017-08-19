@@ -108,6 +108,7 @@ public class OuterPanel extends JPanel {
 
     /* The listener that listens the up button. */
     private class Up implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             queue[0].enqueue(new OuterUpMessage(floorNumber));
@@ -123,6 +124,7 @@ public class OuterPanel extends JPanel {
 
     /* The listener that listens the down button. */
     private class Down implements ActionListener {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
             queue[0].enqueue(new OuterDownMessage(floorNumber));
