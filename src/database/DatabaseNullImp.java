@@ -18,6 +18,8 @@ public class DatabaseNullImp implements Database {
     }
 
     /** Getting records of elevator by elevatorID. */
+    @Override
+
     synchronized public Vector<String> getRecords(int elevatorID)
     {
         Vector<String> v = new Vector<String>();
@@ -25,17 +27,23 @@ public class DatabaseNullImp implements Database {
     }
 
     /** Judge whether a person is Administrator or not. */
+    @Override
+
     synchronized public boolean isAdmin(String a, String b)
     {
         return true;
     }
 
     /** Add a outer request to database. */
+    @Override
+
     synchronized public void addFloorRequest(int a, String type)
     {
     }
 
     /** Get the outer request of the elevator system. */
+    @Override
+
     synchronized public Vector<String> getFloorRequest()
     {
         Vector<String> v = new Vector<String>();
@@ -43,12 +51,16 @@ public class DatabaseNullImp implements Database {
     }
 
     /** Add a inner request to database. */
+    @Override
+
     synchronized public void addControlRecords(int elevatorID,
             String event)
     {
     }
 
     /** Get the currentStatus of the elevator by elevatorID. */
+    @Override
+
     synchronized public String getStatus(int elevatorID)
     {
         String s = "";
@@ -56,6 +68,8 @@ public class DatabaseNullImp implements Database {
     }
 
     /** Update the status of the elevator by elevatorID. */
+    @Override
+
     synchronized public void updateStatus(int i, String status,
                                           int currentFloor)
     {

@@ -12,6 +12,9 @@ public abstract class AbstractSqlDatabase implements Database {
     protected Statement stmt;
 
     /** Getting records of elevator by elevatorID. */
+
+    @Override
+
     synchronized public Vector<String> getRecords(int elevatorID)
     {
         String sql = "select * from control where elevatorID = " + elevatorID;
@@ -52,6 +55,8 @@ public abstract class AbstractSqlDatabase implements Database {
     }
 
     /** Judge whether a person is Administrator or not. */
+    @Override
+
     synchronized public boolean isAdmin(String a, String b)
     {
         String sql = "select * from admin where adminname = \'" + a
@@ -70,6 +75,8 @@ public abstract class AbstractSqlDatabase implements Database {
     }
 
     /** Add a outer request to database. */
+    @Override
+
     synchronized public void addFloorRequest(int a, String type)
     {
         String sql = "insert into request values(" + a + ",'" + type + "','"
@@ -85,6 +92,8 @@ public abstract class AbstractSqlDatabase implements Database {
     }
 
     /** Get the outer request of the elevator system. */
+    @Override
+
     synchronized public Vector<String> getFloorRequest()
     {
         Vector<String> v = new Vector<String>();
@@ -122,6 +131,8 @@ public abstract class AbstractSqlDatabase implements Database {
     }
 
     /** Add a inner request to database. */
+    @Override
+
     synchronized public void addControlRecords(int elevatorID,
             String event)
     {
@@ -137,6 +148,8 @@ public abstract class AbstractSqlDatabase implements Database {
     }
 
     /** Get the currentStatus of the elevator by elevatorID. */
+    @Override
+
     synchronized public String getStatus(int elevatorID)
     {
         String sql = "select status from status where elevatorID = "
@@ -156,6 +169,8 @@ public abstract class AbstractSqlDatabase implements Database {
     }
 
     /** Update the status of the elevator by elevatorID. */
+    @Override
+
     synchronized public void updateStatus(int i, String status,
                                           int currentFloor)
     {
