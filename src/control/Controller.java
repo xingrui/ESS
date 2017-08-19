@@ -54,7 +54,7 @@ public class Controller {
         mc = new MessageCenter(null, null, null);
         state = IDLE;
         currentFloor = 1;
-        new CMD_REQ_Analyzer();
+        new CommandRequestAnalyzer();
     }
 
     void setLocation(int location) /* used for test */
@@ -76,7 +76,7 @@ public class Controller {
         state = STOP;
         messages = from;
         this.mc = mc;
-        new CMD_REQ_Analyzer();
+        new CommandRequestAnalyzer();
     }
 
     /**
@@ -396,9 +396,9 @@ public class Controller {
      * of the six queues. this methord according to analyze() of elevator
      */
 
-    private class CMD_REQ_Analyzer extends Thread {
+    private class CommandRequestAnalyzer extends Thread {
 
-        public CMD_REQ_Analyzer()
+        public CommandRequestAnalyzer()
         {
             this.start();
         }
